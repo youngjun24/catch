@@ -134,9 +134,9 @@
             }
 
             #overlay-image {
-                top: 20%; /* 모바일에서의 상단 여백 */
-                left: 50px; /* 모바일에서의 왼쪽 여백 */
-                width: 100px; /* 더 작은 화면에서의 이미지 크기 조정 */
+            top: 10px; /* 모바일에서의 상단 여백 */
+            left: 10px; /* 모바일에서의 왼쪽 여백 */
+            width: 120px; /* 더 작은 화면에서의 이미지 크기 조정 */
             }
         }
 
@@ -164,8 +164,8 @@
             }
 
             #overlay-image {
-                top: 20%; /* 모바일에서의 상단 여백 */
-                left: 50px; /* 모바일에서의 왼쪽 여백 */
+                top: 10px; /* 모바일에서의 상단 여백 */
+                left: 10px; /* 모바일에서의 왼쪽 여백 */
                 width: 100px; /* 더 작은 화면에서의 이미지 크기 조정 */
             }
         }
@@ -296,7 +296,7 @@
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
     renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));  // 고해상도 화면 대응
+    renderer.setPixelRatio(window.devicePixelRatio);  // 고해상도 화면 대응
 }
 
 window.addEventListener('resize', onWindowResize);
