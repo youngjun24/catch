@@ -128,7 +128,7 @@
 
             .modal {
                 width: 90%;       /* 모달 너비를 화면의 90%로 설정 */
-                height: 70%; /* 모달 높이를 화면의 70%로 설정 */
+                height: 65%; /* 모달 높이를 화면의 70%로 설정 */
                 padding: 20px;    /* 패딩 줄이기 */
                 font-size: 1.5em; /* 모달 내부 폰트 크기 줄이기 */
             }
@@ -162,7 +162,7 @@
 
             .modal {
                 width: 95%;
-                height: 65%;
+                height: 60%;
                 font-size: 1.5em;
                 padding: 15px;
             }
@@ -370,7 +370,7 @@ for (let i = 0; i < particleCount; i++) {
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
     renderer.setSize(width, height);
-    renderer.setPixelRatio(1);  // 고해상도 화면 대응
+    renderer.setPixelRatio(2);  // 고해상도 화면 대응
 }
 
 window.addEventListener('resize', onWindowResize);
@@ -390,8 +390,16 @@ onWindowResize();
             description.style.display = "none";
         });
 
+        // 모든 모달을 닫는 함수
+        function closeAllModals() {
+        const modals = document.querySelectorAll(".modal");
+        modals.forEach(modal => {
+        modal.style.display = "none";
+           });
+        }
         // 모달 열기와 닫기 함수
         function openModal(modalId) {
+            closeAllModals();  // 모든 모달 닫기
             document.getElementById(modalId).style.display = "block";
         }
 
