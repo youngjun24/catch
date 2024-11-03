@@ -296,10 +296,11 @@
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
     renderer.setSize(width, height);
-    //renderer.setPixelRatio(window.devicePixelRatio);  // 고해상도 화면 대응
+    renderer.setPixelRatio(window.devicePixelRatio);  // 고해상도 화면 대응
 }
 
 window.addEventListener('resize', onWindowResize);
+onWindowResize();
 
 
         // 초기 텍스트 클릭 이벤트
