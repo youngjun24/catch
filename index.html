@@ -296,7 +296,7 @@
         var scene = new THREE.Scene();
         var camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 1000);
         var renderer = new THREE.WebGLRenderer();
-        renderer.setPixelRatio(2);
+        renderer.setPixelRatio(1);
         renderer.setSize(window.innerWidth, window.innerHeight);
         
         document.body.appendChild(renderer.domElement);
@@ -370,7 +370,7 @@ for (let i = 0; i < particleCount; i++) {
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
     renderer.setSize(width, height);
-    renderer.setPixelRatio(2);  // 고해상도 화면 대응
+    renderer.setPixelRatio(1);  // 고해상도 화면 대응
 }
 
 window.addEventListener('resize', onWindowResize);
