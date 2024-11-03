@@ -179,6 +179,37 @@
            overflow: hidden;
 }
 
+.toggle-button {
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    width: 60px;
+    height: 30px;
+    background-color: #333;
+    border-radius: 30px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    transition: background-color 0.3s;
+}
+
+.toggle-button .toggle-circle {
+    width: 25px;
+    height: 25px;
+    background-color: #834aff;
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+.toggle-button.light {
+    background-color: #ddd;
+}
+
+.toggle-button.light .toggle-circle {
+    transform: translateX(30px);
+}
+
     </style>
     <script type="importmap">
     {
@@ -198,7 +229,9 @@
         <sv id="button2">Service</sv>
         <c id="button3">Contact</c>
     </div>
-
+    <div class="toggle-button" id="modeToggle">
+        <div class="toggle-circle"></div>
+    </div>
     <img id="overlay-image" src="clogo.png" alt="오버레이 이미지">
 
     <!-- 각 모달 추가 -->
@@ -369,6 +402,42 @@ onWindowResize();
         document.getElementById("closeContact").addEventListener("click", () => closeModal("modalContact"));
 
         document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+        const modeToggle = document.getElementById("modeToggle");
+const toggleCircle = modeToggle.querySelector(".toggle-circle");
+
+let isDarkMode = true; // 기본값: 다크 모드
+
+modeToggle.addEventListener("click", () => {
+    isDarkMode = !isDarkMode;
+
+    if (isDarkMode) {
+        document.body.style.backgroundColor = "#121212";
+        document.body.style.color = "white";
+        scene.background = new THREE.Color(0x121212); // Three.js 배경색 변경
+        renderer.setClearColor(0x121212, 1);
+        modeToggle.classList.remove("light");
+    } else {
+        document.body.style.backgroundColor = "white";
+        document.body.style.color = "black";
+        scene.background = new THREE.Color(0xffffff); // Three.js 배경색 변경
+        renderer.setClearColor(0xffffff, 1);
+        modeToggle.classList.add("light");
+    }
+
+    // 모달 내부 텍스트 색상 변경
+    document.querySelectorAll(".modal").forEach(modal => {
+        modal.style.color = isDarkMode ? "white" : "black";
+        modal.style.backgroundColor = isDarkMode ? "rgba(18, 18, 18, 0.9)" : "rgba(255, 255, 255, 0.9)";
+    });
+});
+
+const overlayImage = document.getElementById("overlay-image");
+
+overlayImage.addEventListener("click", () => {
+    location.reload(); // 페이지 새로고침
+});
+
 
     </script>
 </body>
