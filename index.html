@@ -307,11 +307,30 @@
         var ambient = new THREE.AmbientLight(0xa1a1a1);
         scene.add(ambient);
 
+        // 애니메이션 관련 변수 선언
+        let mixer;
+        let action;
+
         var group = new THREE.Object3D();
         const loader = new GLTFLoader();
         loader.load(
-            'catch.glb',
-            function (gltf) { group.add(gltf.scene); },
+    
+            'catch1.glb',
+            function (gltf) { group.add(gltf.scene); 
+                // 애니메이션 설정
+        mixer = new THREE.AnimationMixer(gltf.scene);
+        action = mixer.clipAction(gltf.animations[0]); // 첫 번째 애니메이션 선택 (필요에 따라 조정 가능)
+        
+        // 애니메이션 루프를 1회로 설정
+        action.setLoop(THREE.LoopOnce);
+        action.clampWhenFinished = true; // 애니메이션이 끝난 후 마지막 프레임에서 멈추도록 설정
+
+        // 클릭 이벤트를 추가하여 애니메이션 재생
+        document.getElementById("canvas-container").addEventListener("click", () => {
+            action.reset(); // 애니메이션 상태를 처음으로 초기화
+            action.play();  // 애니메이션 재생
+        });
+            },
             undefined,
             function (error) { console.log('An error happened'); }
         );
@@ -356,6 +375,9 @@ for (let i = 0; i < particleCount; i++) {
 
         function animate() {
             requestAnimationFrame(animate);
+
+            // 애니메이션 믹서 업데이트 (애니메이션이 있을 경우에만 실행)
+            if (mixer) mixer.update(0.016); // 60fps 기준으로 업데이트 시간 설정 (0.016초)
 
             particleGroup.rotation.y += 0.002;  // y 축을 기준으로 회전 속도 설정 (0.001 정도가 천천히 돎)
 
